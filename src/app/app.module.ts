@@ -8,6 +8,8 @@ import { Lesson } from '../lesson/entities/Lesson.entity';
 import { upperDirectiveTransformer } from '../common/directives/upper-case.directive';
 import { LessonModule } from '../lesson/lesson.module';
 import { RecipesModule } from '../recipes/recipes.module';
+import { StudentModule } from '../student/student.module';
+import { Student } from '../student/entities/student.entity';
 
 @Module({
   imports: [
@@ -16,10 +18,11 @@ import { RecipesModule } from '../recipes/recipes.module';
       url: 'mongodb://localhost/school_management',
       synchronize: true,
       useUnifiedTopology: true,
-      entities: [Lesson],
+      entities: [Lesson, Student],
     }),
     LessonModule,
     RecipesModule,
+    StudentModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       debug: true,

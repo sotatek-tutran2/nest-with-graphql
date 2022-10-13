@@ -29,12 +29,7 @@ export class LessonService {
   }
 
   async remove(id: string): Promise<boolean> {
-    const removeLesson = await this.lessonRepository.delete({ id });
-
-    if (removeLesson) {
-      return true;
-    }
-
-    return false;
+    await this.lessonRepository.delete({ id });
+    return true;
   }
 }

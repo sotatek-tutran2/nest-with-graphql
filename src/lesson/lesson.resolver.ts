@@ -23,7 +23,7 @@ export class LessonResolver {
   }
 
   @Mutation(() => Boolean)
-  removeLesson(@Args('id') id: string) {
+  async removeLesson(@Args('id') id: string) {
     return this.lessonService.remove(id);
   }
 }
