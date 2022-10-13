@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { Student } from './entities/student.entity';
 import { v4 as uuid_v4 } from 'uuid';
@@ -26,5 +26,11 @@ export class StudentService {
 
   findById(id: string): Promise<StudentType> {
     return this.studentRepository.findOneBy({ id });
+  }
+
+  async getManyStudents(studentIds: string[]): Promise<Student[]> {
+    return this.studentRepository.findBy({
+      id: In(studentIds),
+    });
   }
 }

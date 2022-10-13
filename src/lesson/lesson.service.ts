@@ -32,4 +32,15 @@ export class LessonService {
     await this.lessonRepository.delete({ id });
     return true;
   }
+
+  async assignStudentsToLesson(
+    lessonId: string,
+    studentIds: string[],
+  ): Promise<Lesson | void> {
+    const lesson = await this.lessonRepository.findOneBy({ id: lessonId });
+    if (lesson) {
+      lesson.students = [...(lesson.students || []), ...studentIds];
+      return this.lessonRepository.save(lesson);
+    }
+  }
 }
